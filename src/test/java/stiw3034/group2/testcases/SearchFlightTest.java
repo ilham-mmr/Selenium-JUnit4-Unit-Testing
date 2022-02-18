@@ -1,7 +1,6 @@
-package stiw3034.group2;
+package stiw3034.group2.testcases;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -16,14 +15,16 @@ import java.util.concurrent.TimeUnit;
 public class SearchFlightTest extends BaseDriverTest {
 
     /**
+     * Test case : UC3.10
      * short description : Tests the search flight functionality (one-way)
      * this tests based on the following input
-     * INPUT "Kuala Lumpur"
-     * TO "Jakarta"
+     * FROM: "Kuala Lumpur"
+     * TO: "Jakarta"
+     * SEAT CLASS : default(ECONOMY)
      */
     @Test
-    @Ignore
-    public void searchFlightOnlyFromAndToFields() {
+//    @Ignore
+    public void uc310searchFlightOnlyFromAndToFields() {
         final String FROM = "Kuala Lumpur";
         final String TO = "Jakarta";
 
@@ -89,16 +90,17 @@ public class SearchFlightTest extends BaseDriverTest {
 
 
     /**
+     * Test case : UC3.20
      * short description : Tests the search flight functionality (roundtrip)
      * this tests based on the following input
-     * INPUT "Kuala Lumpur"
-     * TO "Jakarta"
+     * FROM: "Kuala Lumpur"
+     * TO: "Jakarta"
      * Departure Date : Thu, 03 Feb 2022
      * Return Date: 2 Days ahead from Departure Date (Sat, 05 Feb 2022)
      */
     @Test
-    @Ignore
-    public void searchFlightFromAndToFieldsWithDepartureDate() throws InterruptedException {
+//    @Ignore
+    public void uc320searchFlightFromAndToFieldsWithDepartureDate() throws InterruptedException {
         final String FROM = "Kuala Lumpur";
         final String TO = "Jakarta";
 
@@ -163,7 +165,6 @@ public class SearchFlightTest extends BaseDriverTest {
         // find searchFlightsButton and click it
         WebElement searchFlights = driver.findElement(By.xpath("//*[@id=\"__next\"]/div[5]/div[2]/div[1]/div[2]/div/div[3]/div/div[2]/div/div[2]"));
         searchFlights.click();
-//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -182,16 +183,17 @@ public class SearchFlightTest extends BaseDriverTest {
     }
 
     /**
+     * Test case : UC3.30
      * short description : Tests the search flight functionality (roundtrip) with gibberish input on from and to fields
      * this tests based on the following input
-     * INPUT "jkljkj;jk"
-     * TO "1nlfpsdr"
+     * FROM: "jkljkj;jk"
+     * TO: "1nlfpsdr"
      * Departure Date : Thu, 03 Feb 2022
      * Return Date: 2 Days ahead from Departure Date (Sat, 05 Feb 2022)
      */
     @Test
 //    @Ignore
-    public void searchFlightFromAndToFieldsWithGiberrishInput() throws InterruptedException {
+    public void uc330searchFlightFromAndToFieldsWithGiberrishInput() throws InterruptedException {
         final String FROM = "jkljkj;jk";
         final String TO = "1nlfpsdr";
 
@@ -225,7 +227,6 @@ public class SearchFlightTest extends BaseDriverTest {
         }
 
 
-
         // click departure date
         WebElement departureDate = driver.findElement(By.xpath("//*[@id=\"__next\"]/div[5]/div[2]/div[1]/div[2]/div/div[3]/div/div[2]/div/div[1]/div[3]/div[1]/div/div[1]/div[1]"));
         departureDate.click();
@@ -241,14 +242,14 @@ public class SearchFlightTest extends BaseDriverTest {
         Thread.sleep(200);
 
         returnDate.click();
+        Thread.sleep(200);
 
 
         // find searchFlightsButton and click it
-        WebElement searchFlights = driver.findElement(By.xpath("//*[@id=\"__next\"]/div[5]/div[2]/div[1]/div[2]/div/div[3]/div/div[2]/div/div[3]"));
+        WebElement searchFlights = driver.findElement(By.xpath("//*[@id=\"__next\"]/div[5]/div[2]/div[1]/div[2]/div/div[3]/div/div[2]/div/div[2]"));
         searchFlights.click();
-//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -265,14 +266,15 @@ public class SearchFlightTest extends BaseDriverTest {
 
 
     /**
+     * Test case : UC3.40
      * short description : Tests the search flight functionality (roundtrip) with gibberish input on from and to fields
      * this tests based on the following input
-     * INPUT "jkljkj;jk"
-     * TO "1nlfpsdr"
+     * FROM: "jkljkj;jk"
+     * TO: "1nlfpsdr"
      */
     @Test(expected = org.openqa.selenium.NoSuchElementException.class)
     //    @Ignore
-    public void searchFlightFromAndToFieldsWithSameCity() throws InterruptedException {
+    public void uc340searchFlightFromAndToFieldsWithSameCity() throws InterruptedException {
         final String FROM = "jakarta";
         final String TO = "jakarta";
 
@@ -337,7 +339,6 @@ public class SearchFlightTest extends BaseDriverTest {
         // find searchFlightsButton and click it
         WebElement searchFlights = driver.findElement(By.xpath("//*[@id=\"__next\"]/div[5]/div[2]/div[1]/div[2]/div/div[3]/div/div[2]/div/div[3]"));
         searchFlights.click();
-//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
